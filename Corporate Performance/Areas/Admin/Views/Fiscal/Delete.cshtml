@@ -1,0 +1,48 @@
+﻿@model Fiscal
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Delete</h1>
+
+<br />
+<h2 class="text-info">Delete Fiscal Year</h2>
+<br />
+
+<form method="post" asp-action="Delete">
+    <input type="hidden" asp-for="Id" />
+    <fieldset disabled>
+        <div asp-validation-summary="ModelOnly" class=" text-danger"></div>
+        <div class=" form-group row">
+            <div class=" col-2">
+                <label asp-for="FiscalYear" class=" col-form-label"></label>
+            </div>
+            <div class=" col-5">
+                <input asp-for="FiscalYear" class="form-control"/>
+            </div>
+        </div>
+        <div class=" form-group row">
+            <div class=" col-2">
+                <label asp-for="YearStartDate" class=" col-form-label"></label>
+            </div>
+            <div class=" col-5">
+                <input asp-for="YearStartDate" class="form-control" />
+            </div>
+        </div>
+        <div class=" form-group row">
+            <div class=" col-2">
+                <label asp-for="YearEndDate" class=" col-form-label"></label>
+            </div>
+            <div class=" col-5">
+                <input asp-for="YearEndDate" class="form-control" />
+            </div>
+        </div>
+    </fieldset>
+    <div class="form-group row">
+        <div class="col-5 offset-2">
+            <partial name="_DeleteAndBackToListButton" model="Model.Id" />
+        </div>
+    </div>
+</form>

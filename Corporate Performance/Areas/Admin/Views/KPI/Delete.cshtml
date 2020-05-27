@@ -1,0 +1,28 @@
+﻿@model Corporate_Performance.Models.KPI
+
+@{
+    ViewData["Title"] = "Delete";
+}
+<br />
+<h2 class="text-info">Delete</h2>
+<br />
+<form method="post">
+    <input type="hidden" asp-for="Id" />
+    <fieldset disabled>
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="Name" class="custom-label"></label>
+            </div>
+            <div class="col-5">
+                <input asp-for="Name" class="form-control" />
+            </div>
+        </div>
+    </fieldset>
+    <br />
+    <div class="form-group row">
+        <div class="col-5 offset-2">
+            <partial name="_DeleteAndBackToListButton" model="Model.Id" />
+        </div>
+    </div>
+</form>
+
