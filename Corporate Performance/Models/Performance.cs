@@ -20,13 +20,6 @@ namespace Corporate_Performance.Models
         public virtual Fiscal Fiscal { get; set; }
 
         [Required]
-        [Display(Name = "Period")]
-        public int PeriodId { get; set; }
-
-        [ForeignKey("PeriodId")]
-        public virtual Period Period { get; set; }
-
-        [Required]
         [Display(Name = "KPA")]
         public int KPAId { get; set; }
 
@@ -40,22 +33,45 @@ namespace Corporate_Performance.Models
         [ForeignKey("KPIId")]
         public virtual KPI KPI { get; set; }
 
-        [Required]
-        [Display(Name = "Programme")]
-        public int ProgramId { get; set; }
+        [Display(Name ="Qrt1 Target")]
+        public int Qrt1Target { get; set; }
 
-        [ForeignKey("ProgramId")]
-        public virtual Programme Programme { get; set; }
+        [Display(Name = "Qrt1 Actual")]
+        public int Qrt1Actual { get; set; }
 
+        [Display(Name = "Qrt2 Target")]
+        public int Qrt2Target { get; set; }
 
-        [Display(Name ="Quarter Target")]
-        public int QrtTarget { get; set; }
+        [Display(Name = "Qrt2 Actual")]
+        public int Qrt2Actual { get; set; }
 
-        [Display(Name = "Quarter Actual")]
-        public int QrtActual { get; set; }
+        [Display(Name = "Qrt3 Target")]
+        public int Qrt3Target { get; set; }
 
-        [Display(Name = "Quarterly Deviation ")]
-        public int QrtDeviation { get; set; }
+        [Display(Name = "Qrt3 Actual")]
+        public int Qrt3Actual { get; set; }
+
+        [Display(Name = "Qrt4 Target")]
+        public int Qrt4Target { get; set; }
+
+        [Display(Name = "Qrt4 Actual")]
+        public int Qrt4Actual { get; set; }
+
+        [Display(Name = "Qrt1 Deviation ")]
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+        public int Qrt1Deviation { get; private set; }
+
+        [Display(Name = "Qrt2 Deviation ")]
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+        public int Qrt2Deviation { get; private set; }
+
+        [Display(Name = "Qrt3 Deviation ")]
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+        public int Qrt3Deviation { get; private set; }
+
+        [Display(Name = "Qrt4 Deviation ")]
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+        public int Qrt4Deviation { get; private set; }
 
         [Display(Name = "Annual Target")]
         public int AnnualTarget { get; set; }
@@ -64,7 +80,8 @@ namespace Corporate_Performance.Models
         public int AnnualActual { get; set; }
 
         [Display(Name = "Annual Deviation")]
-        public int AnnualDeviation { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+        public int AnnualDeviation { get; private set; }
 
         [Display(Name = "Corrective Action")]
         public string CorrectiveAction { get; set; }
@@ -72,8 +89,7 @@ namespace Corporate_Performance.Models
         [Display(Name = "Comments")]          
         public string Comments { get; set; }
 
-        [Display(Name = "POE Attachments")]
-        public string Files { get; set; }
+        public ICollection<Files> Files { get; set; }
 
     }
 }

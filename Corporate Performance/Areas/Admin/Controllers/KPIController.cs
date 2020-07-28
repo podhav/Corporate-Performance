@@ -5,11 +5,15 @@ using System.Threading.Tasks;
 using Corporate_Performance.Data;
 using Corporate_Performance.Models;
 using Corporate_Performance.Models.ViewModels;
+using Corporate_Performance.Utility;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
+
 namespace Corporate_Performance.Area.Admin.Controllers
 {
+    [Authorize(Roles = SD.ManagerUser)]
     [Area("Admin")]
     public class KPIController : Controller
     {
@@ -24,12 +28,50 @@ namespace Corporate_Performance.Area.Admin.Controllers
         }
 
         //GET
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortOrder, int? pageNumber, string currentFilter, string searchString)
         {
-            var kpi = await _db.KPI.Include(s => s.Programme).ToListAsync();
-            return View(kpi);
+            ViewData["CurrentSort"] = sortOrder;
+            ViewData["NameSortParam"] = string.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewData["ProgSortParam"] = string.IsNullOrEmpty(sortOrder) ? "prog_desc" : "";
+            ViewData["CurrentFilter"] = searchString;
 
-        }
+            if (searchString != null)
+            {
+                pageNumber = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewData["CurrentFilter"] = searchString;
+
+            var KPI = from s in _db.KPI.Include(s=>s.Programme)
+                      select s;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+               KPI = KPI.Where(s => s.Name.Contains(searchString)
+                                       || s.Programme.Name.Contains(searchString));
+            }
+
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    KPI = KPI.OrderByDescending(s => s.Name);                   
+                    break;
+                case "prog_desc":
+                    KPI = KPI.OrderByDescending(s => s.Programme.Name);
+                    break;
+                default:
+                    KPI = KPI.OrderBy(s => s.Name);
+                    break;
+            }
+            int pageSize = 4;
+            return View(await PaginatedList<KPI>.CreateAsync(KPI.AsNoTracking(), pageNumber ?? 1, pageSize));
+
+        }           
+
         //GET FOR CREATE
         public async Task<IActionResult> Create()
         {
@@ -117,6 +159,7 @@ namespace Corporate_Performance.Area.Admin.Controllers
                     return RedirectToAction(nameof(Index));
                 }
             }
+
             KPIandProgrammeModel modelVM = new KPIandProgrammeModel()
             {
                 ProgrammeList = await _db.Programme.ToListAsync(),

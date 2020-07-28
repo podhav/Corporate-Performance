@@ -15,9 +15,40 @@ namespace Corporate_Performance.Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.4")
+                .HasAnnotation("ProductVersion", "3.1.5")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("Corporate_Performance.Models.Files", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime?>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<byte[]>("DataFiles")
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("FileName")
+                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(100);
+
+                    b.Property<string>("FileType")
+                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(100);
+
+                    b.Property<int>("PerformanceId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PerformanceId");
+
+                    b.ToTable("Files");
+                });
 
             modelBuilder.Entity("Corporate_Performance.Models.Fiscal", b =>
                 {
@@ -67,8 +98,7 @@ namespace Corporate_Performance.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("ProgrammeId")
-                        .IsRequired()
+                    b.Property<int>("ProgrammeId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -89,6 +119,7 @@ namespace Corporate_Performance.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("AnnualDeviation")
+                        .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("int");
 
                     b.Property<int>("AnnualTarget")
@@ -100,9 +131,6 @@ namespace Corporate_Performance.Data.Migrations
                     b.Property<string>("CorrectiveAction")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Files")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("FiscalId")
                         .HasColumnType("int");
 
@@ -112,19 +140,44 @@ namespace Corporate_Performance.Data.Migrations
                     b.Property<int>("KPIId")
                         .HasColumnType("int");
 
-                    b.Property<int>("PeriodId")
+                    b.Property<int>("Qrt1Actual")
                         .HasColumnType("int");
 
-                    b.Property<int>("ProgramId")
+                    b.Property<int>("Qrt1Deviation")
+                        .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("int");
 
-                    b.Property<int>("QrtActual")
+                    b.Property<int>("Qrt1Target")
                         .HasColumnType("int");
 
-                    b.Property<int>("QrtDeviation")
+                    b.Property<int>("Qrt2Actual")
                         .HasColumnType("int");
 
-                    b.Property<int>("QrtTarget")
+                    b.Property<int>("Qrt2Deviation")
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("int");
+
+                    b.Property<int>("Qrt2Target")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Qrt3Actual")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Qrt3Deviation")
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("int");
+
+                    b.Property<int>("Qrt3Target")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Qrt4Actual")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Qrt4Deviation")
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("int");
+
+                    b.Property<int>("Qrt4Target")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -135,32 +188,7 @@ namespace Corporate_Performance.Data.Migrations
 
                     b.HasIndex("KPIId");
 
-                    b.HasIndex("PeriodId");
-
-                    b.HasIndex("ProgramId");
-
                     b.ToTable("Performance");
-                });
-
-            modelBuilder.Entity("Corporate_Performance.Models.Period", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("QrtEndDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("QrtStartDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("Quarter")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Period");
                 });
 
             modelBuilder.Entity("Corporate_Performance.Models.Programme", b =>
@@ -242,6 +270,10 @@ namespace Corporate_Performance.Data.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(256)")
                         .HasMaxLength(256);
@@ -293,6 +325,8 @@ namespace Corporate_Performance.Data.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUser");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -322,12 +356,10 @@ namespace Corporate_Performance.Data.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(128)")
-                        .HasMaxLength(128);
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProviderKey")
-                        .HasColumnType("nvarchar(128)")
-                        .HasMaxLength(128);
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)");
@@ -364,12 +396,10 @@ namespace Corporate_Performance.Data.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(128)")
-                        .HasMaxLength(128);
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(128)")
-                        .HasMaxLength(128);
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Value")
                         .HasColumnType("nvarchar(max)");
@@ -377,6 +407,25 @@ namespace Corporate_Performance.Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("Corporate_Performance.Models.ApplicationUser", b =>
+                {
+                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasDiscriminator().HasValue("ApplicationUser");
+                });
+
+            modelBuilder.Entity("Corporate_Performance.Models.Files", b =>
+                {
+                    b.HasOne("Corporate_Performance.Models.Performance", "Performance")
+                        .WithMany("Files")
+                        .HasForeignKey("PerformanceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Corporate_Performance.Models.KPI", b =>
@@ -405,18 +454,6 @@ namespace Corporate_Performance.Data.Migrations
                     b.HasOne("Corporate_Performance.Models.KPI", "KPI")
                         .WithMany()
                         .HasForeignKey("KPIId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Corporate_Performance.Models.Period", "Period")
-                        .WithMany()
-                        .HasForeignKey("PeriodId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Corporate_Performance.Models.Programme", "Programme")
-                        .WithMany()
-                        .HasForeignKey("ProgramId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

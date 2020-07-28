@@ -1,8 +1,49 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿@model Corporate_Performance.Models.ViewModels.IndexViewModel
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<br />
+<div class="backgroundWhite container">
+
+    <ul id="menu-filters" class="menu-filter-list list-inline text-center">
+        <li class="active btn btn-secondary ml-1 mr-1" data-filter=".all-years">Show All</li>
+
+        @foreach (var item in Model.Fiscal)
+        {
+            <li class="ml-1 mr-1" data-filter=".@item.FiscalYear">@item.FiscalYear</li>
+        }
+    </ul>
+
+    @foreach (var item in Model.Fiscal)
+    {
+        <div class="row" id="menu-wrapper">
+            <partial name="_ThumbNailAreaPartial" model="@Model.performance.Where(p=>p.Fiscal.FiscalYear.Equals(item.FiscalYear))" />
+        </div>
+    }
 </div>
+
+@section Scripts{
+    <script src="https://code.jquery.com/jquery-3.5.1.js" 
+            integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+            crossorigin="anonymous">
+
+    </script>
+
+    <script>var posts = $('.post');
+
+    (function ($) {
+
+        $("#menu-filters li").click(function() {
+            $("#menu-filters li").removeClass('active btn btn-secondary');
+            $(this).addClass('active btn btn-secondary');
+
+            var selectedFilter = $(this).data("filter");
+
+            $(".all-years").fadeOut();
+
+            setTimeout(function () {
+                $(selectedFilter).slideDown();
+            }, 300);
+        });
+
+        })(jQuery);
+    </script>
+}

@@ -4,11 +4,15 @@ using System.Linq;
 using System.Threading.Tasks;
 using Corporate_Performance.Data;
 using Corporate_Performance.Models;
+using Corporate_Performance.Utility;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace Corporate_Performance.Area.Admin.Controllers
 {
+    
+    [Authorize(Roles =SD.ManagerUser)]
     [Area("Admin")]
     public class FiscalController : Controller
     {

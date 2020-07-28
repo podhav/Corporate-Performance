@@ -9,33 +9,33 @@
 
 <fieldset disabled>
     <div class=" form-group row">
-        <div class=" col-2">
+        <div class=" col-sm-2">
             <label asp-for="FiscalYear" class=" col-form-label"></label>
         </div>
-        <div class=" col-5">
+        <div class=" col-sm-5">
             <input asp-for="FiscalYear" disabled class="form-control" />
         </div>
     </div>
     <div class=" form-group row">
-        <div class=" col-2">
+        <div class=" col-sm-2">
             <label asp-for="YearStartDate" class=" col-form-label"></label>
         </div>
-        <div class=" col-5">
+        <div class=" col-sm-5">
             <input asp-for="YearStartDate" disabled class="form-control" />
         </div>
     </div>
     <div class=" form-group row">
-        <div class=" col-2">
+        <div class=" col-sm-2">
             <label asp-for="YearEndDate" class=" col-form-label"></label>
         </div>
-        <div class=" col-5">
+        <div class=" col-sm-5">
             <input asp-for="YearEndDate" disabled class="form-control" />
         </div>
     </div>
 </fieldset>
 <br />
 <div class="form-group row">
-    <div class="col-5 offset-2">
+    <div class="col-sm-5 offset-2">
         <partial name="_DetailsAndBackToListButton" model="Model.Id" />
     </div>
 </div>

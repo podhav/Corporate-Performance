@@ -1,0 +1,41 @@
+﻿@model Corporate_Performance.Models.Files
+@{
+    ViewData["Title"] = "Upload File Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<h2 class="text-info">KPI POE Upload Details</h2>
+<br />
+
+<fieldset disabled>
+    <div class=" form-group row">
+        <div class=" col-sm-2">
+            <label asp-for="FileName" class=" col-form-label"></label>
+        </div>
+        <div class=" col-sm-5">
+            <input asp-for="FileName" disabled class="form-control" />
+        </div>
+    </div>
+    <div class=" form-group row">
+        <div class=" col-sm-2">
+            <label asp-for="FileType" class=" col-form-label"></label>
+        </div>
+        <div class=" col-sm-5">
+            <input asp-for="FileType" disabled class="form-control" />
+        </div>
+    </div>
+    <div class=" form-group row">
+        <div class=" col-sm-2">
+            <label asp-for="CreatedOn" class=" col-form-label"></label>
+        </div>
+        <div class=" col-sm-5">
+            <input asp-for="CreatedOn" disabled class="form-control" />
+        </div>
+    </div>
+</fieldset>
+<br />
+<div class="form-group row">
+    <div class="col-sm-5 offset-2">
+        <partial name="_DetailsAndBackToListButton" model="Model.Id" />
+    </div>
+</div>

@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30204.135
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{F14B399A-7131-4C87-9E4B-1186C45EF12D}") = "CPMS Report Project", "CPMS Report Project.rptproj", "{AEBD9C05-C871-4FBA-9919-6FCB795819F5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Default = Debug|Default
+		DebugLocal|Default = DebugLocal|Default
+		Release|Default = Release|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AEBD9C05-C871-4FBA-9919-6FCB795819F5}.Debug|Default.ActiveCfg = Debug
+		{AEBD9C05-C871-4FBA-9919-6FCB795819F5}.Debug|Default.Build.0 = Debug
+		{AEBD9C05-C871-4FBA-9919-6FCB795819F5}.Debug|Default.Deploy.0 = Debug
+		{AEBD9C05-C871-4FBA-9919-6FCB795819F5}.DebugLocal|Default.ActiveCfg = DebugLocal
+		{AEBD9C05-C871-4FBA-9919-6FCB795819F5}.DebugLocal|Default.Build.0 = DebugLocal
+		{AEBD9C05-C871-4FBA-9919-6FCB795819F5}.Release|Default.ActiveCfg = Release
+		{AEBD9C05-C871-4FBA-9919-6FCB795819F5}.Release|Default.Build.0 = Release
+		{AEBD9C05-C871-4FBA-9919-6FCB795819F5}.Release|Default.Deploy.0 = Release
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {03FD7284-F5E9-49DC-BDBE-E14917AFCE36}
+	EndGlobalSection
+EndGlobal

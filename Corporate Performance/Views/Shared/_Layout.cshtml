@@ -1,18 +1,20 @@
-﻿<!DOCTYPE html>
+﻿@using Corporate_Performance.Utility
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Corporate_Performance</title>
+    <title>@ViewData["Title"] - Corporate Performance System</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
     <script src="https://kit.fontawesome.com/3f206a72d0.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.tiny.cloud/1/6giuzail8rww42rj969nubjoknpwlf9et95y3im2c5oclbed/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script></head>
+    <script src="https://cdn.tiny.cloud/1/6giuzail8rww42rj969nubjoknpwlf9et95y3im2c5oclbed/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+</head>
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Corporate Performance</a>
+                <a class="navbar-brand" asp-area="CPMS" asp-controller="Home" asp-action="Index">ECDC Corporate Performance</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -20,33 +22,41 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <partial name="_LoginPartial" />
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item dropdown text-white-50">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropDownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                KPI Management
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropDownMenuLink">
-                                <a class="dropdown-item" asp-action="Index" asp-controller="Programme" asp-area="Admin">Programme</a>
-                                <a class="dropdown-item" asp-action="Index" asp-controller="KPA" asp-area="Admin">KPA</a>
-                                <a class="dropdown-item" asp-action="Index" asp-controller="KPI" asp-area="Admin">KPI</a>
-                                <a class="dropdown-item" asp-action="Index" asp-controller="Performance" asp-area="Admin">Performance</a>
-                                <a class="dropdown-item" asp-action="Index" asp-controller="Period" asp-area="Admin">Period</a>
-                                <a class="dropdown-item" asp-action="Index" asp-controller="Fiscal" asp-area="Admin">Fiscal</a>
-                                <a class="dropdown-item">Users</a>
-                            </div>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
+
+                        @if (User.IsInRole(SD.ManagerUser))
+                        {
+                            <li class="nav-item dropdown text-white-50">
+
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropDownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    KPI Management
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropDownMenuLink">
+                                    <a class="dropdown-item" asp-action="Index" asp-controller="Programme" asp-area="Admin">Programme</a>
+                                    <a class="dropdown-item" asp-action="Index" asp-controller="KPA" asp-area="Admin">KPA</a>
+                                    <a class="dropdown-item" asp-action="Index" asp-controller="KPI" asp-area="Admin">KPI</a>
+                                    <a class="dropdown-item" asp-action="Index" asp-controller="Performance" asp-area="Admin">Performance</a>
+                                    <a class="dropdown-item" asp-action="Index" asp-controller="Fiscal" asp-area="Admin">Fiscal</a>
+                                    <a class="dropdown-item" asp-action="Index" asp-controller="User" asp-area="Admin">Users</a>
+                                    <a class="dropdown-item" asp-action="Index" asp-controller="File" asp-area="CPMS">Files</a>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown text-white-50">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropDownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Reports
+                                </a>                                
+                                <div class="dropdown-menu" aria-labelledby="navbarDropDownMenuLink">
+                                    <a class="dropdown-item" href="http://ecdc-wsl301/ReportServer?%2fCPMS+Report+Project%2fList+of+ECDC+Key+Indicators+by+Programme&rs:Command=Render" target="_blank">List of Key Indicators</a>
+                                    <a class="dropdown-item" href="http://ecdc-wsl301/Reports/report/CPMS%20Report%20Project/List%20of%20ECDC%20Programmes" target="_blank">List of Programmes</a>
+                                </div>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
     <div class="container">
-        <main role="main" class="pb-3">
+        <main role="main" class="pb-2">
             @RenderBody()
         </main>
     </div>

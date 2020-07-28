@@ -1,0 +1,73 @@
+﻿@model IEnumerable<Files>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<br />
+<div class="row">
+    <div class="col 6">
+        <h2 class="text-info">List of Uploaded POE Files</h2>
+    </div>    
+</div>
+<br />
+<div>
+
+    @if (Model != null)
+    {
+        <table class="table table-striped border">
+            <tr class="table-secondary">
+
+                <th>
+                    @Html.DisplayNameFor(p => p.Id)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(p => p.Performance)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(p => p.FileName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(p => p.FileType)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(p => p.CreatedOn)
+                </th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(P => item.Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(P => item.PerformanceId)
+                    </td>
+                    <td>
+                        <ul>
+                            <li>
+                                <a asp-action="Download"
+                                   asp-route-filename="@item.FileName">
+                                    @item.FileName
+                                </a>
+                            </li>
+                        </ul>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(P => item.FileType)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(P => item.CreatedOn)
+                    </td>
+                    <td>
+                        <partial name="_TableButtonPartial" model="item.Id" />
+                    </td>
+                </tr>
+            }
+        </table>
+    }
+    else
+    {
+        <p>No Uploaded Files exists.... </p>
+    }
+</div>

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -11,6 +13,7 @@ using Microsoft.Extensions.Logging;
 namespace Corporate_Performance.Areas.Identity.Pages.Account
 {
     [AllowAnonymous]
+    [Area("Identity")]
     public class LogoutModel : PageModel
     {
         private readonly SignInManager<IdentityUser> _signInManager;
@@ -23,11 +26,11 @@ namespace Corporate_Performance.Areas.Identity.Pages.Account
         }
 
         public void OnGet()
-        {
-        }
+        { }   
 
         public async Task<IActionResult> OnPost(string returnUrl = null)
         {
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             await _signInManager.SignOutAsync();
             _logger.LogInformation("User logged out.");
             if (returnUrl != null)
@@ -36,8 +39,9 @@ namespace Corporate_Performance.Areas.Identity.Pages.Account
             }
             else
             {
-                return RedirectToPage();
+                return RedirectToPage("/Account/Logout");
             }
         }
     }
 }
+

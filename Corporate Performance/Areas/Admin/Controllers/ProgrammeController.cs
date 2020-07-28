@@ -4,32 +4,62 @@ using System.Linq;
 using System.Threading.Tasks;
 using Corporate_Performance.Data;
 using Corporate_Performance.Models;
+using Corporate_Performance.Models.ViewModels;
+using Corporate_Performance.Utility;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 namespace Corporate_Performance.Area.Admin.Controllers
 {
+    [Authorize(Roles = SD.ManagerUser)]
     [Area("Admin")]
     public class ProgrammeController : Controller
     {
-        private readonly ApplicationDbContext _db;
-
+        private readonly ApplicationDbContext _db;       
         public ProgrammeController(ApplicationDbContext db)
         {
             _db = db;
         }
 
         //GET
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortOrder, int? pageNumber, string currentFilter, string searchString)
         {
-            return View(await _db.Programme.ToListAsync());
-        }
+            ViewData["CurrentSort"] = sortOrder;
+            ViewData["NameSortParam"] = string.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewData["CurrentFilter"] = searchString;
 
-        //GET FOR CREATE
-        public IActionResult Create()
-        {
-            return View();
+            if (searchString != null)
+            {
+                pageNumber = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewData["CurrentFilter"] = searchString;
+
+            var Programme = from s in _db.Programme
+                      select s;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                Programme = Programme.Where(s => s.Name.Contains(searchString));
+            }
+
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    Programme = Programme.OrderByDescending(s => s.Name);
+                    break;
+                default:
+                    Programme = Programme.OrderBy(s => s.Name);
+                    break;
+            }
+            int pageSize = 5;
+            return View(await PaginatedList<Programme>.CreateAsync(Programme.AsNoTracking(), pageNumber ?? 1, pageSize));
         }
 
         //POST CREATE

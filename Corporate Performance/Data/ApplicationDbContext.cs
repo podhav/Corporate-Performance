@@ -16,9 +16,11 @@ namespace Corporate_Performance.Data
         public DbSet<Programme>Programme { get; set;}
         public DbSet<KPA>KPA { get; set; }
         public DbSet<KPI>KPI { get; set; }
-        public DbSet<Period>Period { get; set; }
         public DbSet<Fiscal>Fiscal { get; set; }
         public DbSet<Performance>Performance { get; set; }
+        public DbSet<ApplicationUser> ApplicationUser { get; set; }
+        public DbSet<Files> Files { get; set; }
+
 
     }
 }

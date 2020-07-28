@@ -1,0 +1,42 @@
+  public IActionResult CreatePOST(IFormFile files)
+        {
+            if (files != null)
+            {
+                if (files.Length > 0)
+                {
+                    //Getting FileName
+                    var fileName = Path.GetFileName(files.FileName);
+                    //Getting file Extension
+                    var fileExtension = Path.GetExtension(fileName);
+                    // concatenating  FileName + FileExtension
+                    var newFileName = String.Concat(Convert.ToString(Guid.NewGuid()), fileExtension);
+
+                    var objfiles = new Files()
+                    {
+                        FileName = fileName,
+                        FileType = fileExtension,
+                        CreatedOn = DateTime.Now
+                    };
+
+                    using (var target = new MemoryStream())
+                    {
+                        files.CopyTo(target);
+                        objfiles.DataFiles = target.ToArray();
+                    }
+		    
+		    var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images", photo.FileName);
+		    
+		    using (var stream = new FileStream(path, FileMode.Create);
+                    {
+			files.CopyToAsync(stream);
+                    	product.Photos.Add(photo.FileName);
+	            }
+
+
+
+                    _db.Files.Add(objfiles);
+                    _db.SaveChanges();
+                }               
+            }
+            return RedirectToAction(nameof(Index));
+        }

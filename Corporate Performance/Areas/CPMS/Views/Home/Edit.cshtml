@@ -1,0 +1,177 @@
+﻿@model Corporate_Performance.Models.ViewModels.IndexViewModel
+@using Corporate_Performance.Extensions
+@{
+    ViewData["Title"] = "Create KPI";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<h2 class="text-info">Edit Performance KPI</h2>
+<br />
+
+<form method="post" asp-action="Edit" enctype="multipart/form-data">
+
+    <input type="hidden" asp-for="Performance.Id" />
+    <input type="hidden" asp-for="Performance.KPIId" />
+    <input type="hidden" asp-for="Performance.KPAId" />
+    <input type="hidden" asp-for="Performance.FiscalId" />
+
+    <div asp-validation-summary="ModelOnly" class=" text-danger"></div>
+    <div class=" form-group row">
+        <div class=" col-2">
+            <label asp-for="Performance.Fiscal" class=" col-form-label"></label>
+        </div>
+        <div class=" col-2">
+            <input asp-for="Performance.Fiscal.FiscalYear" readonly class="form-control">
+        </div>
+        <div class=" col-2 text-sm-right">
+            <label asp-for="Performance.KPI.Programme" class=" col-form-label"></label>
+        </div>
+        <div class=" col-4">
+            <input asp-for="Performance.KPI.Programme.Name" readonly class="form-control">
+        </div>
+    </div>
+    <div class=" form-group row">
+        <div class=" col-2">
+            <label asp-for="Performance.KPA" class=" col-form-label"></label>
+        </div>
+        <div class=" col-5">
+            <input asp-for="Performance.KPA.Name" readonly class="form-control">
+        </div>
+    </div>
+    <div class=" form-group row">
+        <div class=" col-2">
+            <label asp-for="Performance.KPI" class=" col-form-label"></label>
+        </div>
+        <div class=" col-8">
+            <input asp-for="Performance.KPI.Name" readonly class="form-control bg-light">
+        </div>
+    </div>
+    <div class=" form-group row">
+        <div class=" col-2">
+            <label asp-for="Performance.Qrt1Actual" class="col-form-label"></label>
+        </div>
+        <div class=" col-2">
+            <Input asp-for="Performance.Qrt1Actual" class="form-control" type="text" />
+        </div>
+        <span asp-validation-for="Performance.Qrt1Actual" class="text-danger"></span>
+        <div class=" col-2">
+            <label asp-for="Performance.Qrt1Target" class="col-form-label"></label>
+        </div>
+        <div class=" col-2">
+            <Input asp-for="Performance.Qrt1Target" readonly class="form-control" type="text" />
+        </div>
+        <span asp-validation-for="Performance.Qrt1Target" class="text-danger"></span>
+    </div>
+    <div class=" form-group row">
+        <div class=" col-2">
+            <label asp-for="Performance.Qrt2Actual" class=" col-form-label"></label>
+        </div>
+        <div class=" col-2">
+            <Input asp-for="Performance.Qrt2Actual" class="form-control" type="text" />
+        </div>
+        <span asp-validation-for="Performance.Qrt2Actual" class="text-danger"></span>
+        <div class=" col-2">
+            <label asp-for="Performance.Qrt2Target" class=" col-form-label"></label>
+        </div>
+        <div class=" col-2">
+            <Input asp-for="Performance.Qrt2Target" readonly class="form-control" type="text" />
+        </div>
+        <span asp-validation-for="Performance.Qrt2Target" class="text-danger"></span>
+    </div>
+    <div class=" form-group row">
+        <div class=" col-2">
+            <label asp-for="Performance.Qrt3Actual" class="col-form-label"></label>
+        </div>
+        <div class=" col-2">
+            <Input asp-for="Performance.Qrt3Actual" class="form-control" type="text" />
+        </div>
+        <span asp-validation-for="Performance.Qrt3Actual" class="text-danger"></span>
+        <div class=" col-2">
+            <label asp-for="Performance.Qrt3Target" class="col-form-label"></label>
+        </div>
+        <div class=" col-2">
+            <Input asp-for="Performance.Qrt3Target" readonly class="form-control" type="text" />
+        </div>
+        <span asp-validation-for="Performance.Qrt3Target" class="text-danger"></span>
+    </div>
+    <div class=" form-group row">
+        <div class=" col-2">
+            <label asp-for="Performance.Qrt4Actual" class=" col-form-label"></label>
+        </div>
+        <div class=" col-2">
+            <Input asp-for="Performance.Qrt4Actual" class="form-control" type="text" />
+        </div>
+        <span asp-validation-for="Performance.Qrt4Actual" class="text-danger"></span>
+        <div class=" col-2">
+            <label asp-for="Performance.Qrt4Target" class="col-form-label"></label>
+        </div>
+        <div class=" col-2">
+            <Input asp-for="Performance.Qrt4Target" readonly class="form-control" type="text" />
+        </div>
+        <span asp-validation-for="Performance.Qrt4Target" class="text-danger"></span>
+    </div>
+    <div class=" form-group row">
+        <div class=" col-2">
+            <label asp-for="Performance.AnnualActual" class=" col-form-label"></label>
+        </div>
+        <div class=" col-2">
+            <Input asp-for="Performance.AnnualActual" readonly class ="form-control" type="text" />
+        </div>
+        <span asp-validation-for="Performance.AnnualActual" class="text-danger"></span>
+        <div class=" col-2">
+            <label asp-for="Performance.AnnualTarget" class=" col-form-label"></label>
+        </div>
+        <div class=" col-2">
+            <Input asp-for="Performance.AnnualTarget" readonly class="form-control" type="text" />
+        </div>
+        <span asp-validation-for="Performance.AnnualTarget" class="text-danger"></span>
+    </div>
+    <div class=" form-group row">
+        <div class=" col-2">
+            <label asp-for="Performance.CorrectiveAction" class=" col-form-label"></label>
+        </div>
+        <div class=" col-8">
+            @Html.TextAreaFor(p => p.Performance.CorrectiveAction)
+        </div>
+    </div>
+    <div class=" form-group row">
+        <div class=" col-2">
+            <label asp-for="Performance.Comments" class=" col-form-label"></label>
+        </div>
+        <div class=" col-8">
+            @Html.TextAreaFor(p => p.Performance.Comments)
+        </div>
+
+    </div>
+    <div class="form-group row">
+        <div class="col-2">
+            <label asp-for="Files.File" class="col-form-label"></label>
+        </div>
+        <div class="col-5">
+            <input asp-for="Files.File" accept=".xlsx,.xls,image/*,.doc, .docx,.txt,.pdf"
+                   type="file" multiple name="files" class="form-control" />
+        </div>
+        <div>
+            @Html.ActionLink("View Uploaded Files", "List", "File", new { Model.Performance.Id }, htmlAttributes: new { @class = "btn btn-small btn-primary" })
+        </div>        
+
+   </div>
+    <hr />
+    <div class="form-group row">
+        <div class="col-5 offset-2">
+            <partial name="_EditAndBackToListButton" model="Model.Performance.Id" />
+        </div>
+    </div>
+</form>
+
+@section Scripts{
+    <script>
+        tinymce.init({
+            selector: 'textarea',
+            plugins: "lists",
+            menubar: 'file edit format',
+        });
+    </script>
+
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

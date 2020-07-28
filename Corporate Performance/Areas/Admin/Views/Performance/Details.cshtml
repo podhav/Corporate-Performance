@@ -1,0 +1,108 @@
+﻿@model Corporate_Performance.Models.ViewModels.PerformanceViewModel
+@using Corporate_Performance.Extensions
+@{
+    ViewData["Title"] = "Create KPI";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<h2 class="text-info">New Performance Details</h2>
+<br />
+
+<form method="post" asp-action="Create" enctype="multipart/form-data">
+    <div asp-validation-summary="ModelOnly" class=" text-danger"></div>
+    <fieldset disabled>
+        <div class=" form-group row">
+            <div class=" col-2">
+                <label asp-for="Performance.Fiscal" class=" col-form-label"></label>
+            </div>
+            <div class=" col-5">
+                <input asp-for="Performance.Fiscal.FiscalYear" id="FiscalId" class="form-control" />
+            </div>
+        </div>
+        <div class=" form-group row">
+            <div class=" col-2">
+                <label asp-for="Performance.KPA" class=" col-form-label"></label>
+            </div>
+            <div class=" col-5">
+                <input asp-for="Performance.KPA.Name" class="form-control" />
+            </div>
+        </div>
+        <div class=" form-group row">
+            <div class=" col-2">
+                <label asp-for="Performance.KPI" class=" col-form-label"></label>
+            </div>
+            <div class=" col-5">
+                <input asp-for="Performance.KPI.Name" class="form-control bg-light" />
+            </div>
+        </div>
+        <div class=" form-group row">
+            <div class=" col-2">
+                <label asp-for="Performance.Qrt1Target" class="col-form-label"></label>
+            </div>
+            <div class=" col-5">
+                <Input asp-for="Performance.Qrt1Target" class="form-control col-5" type="text" />
+            </div>
+        </div>
+        <div class=" form-group row">
+            <div class=" col-2">
+                <label asp-for="Performance.Qrt2Target" class="col-form-label"></label>
+            </div>
+            <div class=" col-5">
+                <Input asp-for="Performance.Qrt2Target" class="form-control col-5" type="text" />
+            </div>
+        </div>
+        <div class=" form-group row">
+            <div class=" col-2">
+                <label asp-for="Performance.Qrt3Target" class="col-form-label"></label>
+            </div>
+            <div class=" col-5">
+                <Input asp-for="Performance.Qrt3Target" class="form-control col-5" type="text" />
+            </div>
+        </div>
+        <div class=" form-group row">
+            <div class=" col-2">
+                <label asp-for="Performance.Qrt4Target" class="col-form-label"></label>
+            </div>
+            <div class=" col-5">
+                <Input asp-for="Performance.Qrt4Target" class="form-control col-5" type="text" />
+            </div>
+        </div>
+        <div class=" form-group row">
+            <div class=" col-2">
+                <label asp-for="Performance.AnnualTarget" class=" col-form-label"></label>
+            </div>
+            <div class=" col-5">
+                <Input asp-for="Performance.AnnualTarget" class="form-control col-5" type="text" />
+            </div>
+        </div>  
+        <div class=" form-group row">
+            <div class=" col-2">
+                <label asp-for="Performance.Comments" class=" col-form-label"></label>
+            </div>
+            <div class=" col-5">
+                @Html.TextAreaFor(p => p.Performance.Comments)
+            </div>
+        </div>
+    </fieldset>
+
+    <div class="form-group row">
+        <div class="col-5 offset-2">
+            <partial name="_DetailsAndBackToListButton" model="Model.Performance.Id" />
+        </div>
+
+    </div>
+
+</form>
+
+@section Scripts{
+    <script>
+            tinymce.init({
+                selector: 'textarea',
+                plugins: "lists",
+                toolbar: "undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist",
+                menubar: 'file edit format',
+                readonly: 1
+            });</script>
+    <script>tinymce.init({ selector: 'textarea' });</script>
+
+}

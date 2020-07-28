@@ -1,0 +1,126 @@
+﻿@model IEnumerable<Performance>
+
+@if (Model.Count() > 0)
+
+{
+    <div class="col-12 post @Model.FirstOrDefault().Fiscal.FiscalYear all-years">
+        <div class="row">
+            <h5 class="col-2 text-success"> @Model.FirstOrDefault().Fiscal.FiscalYear</h5>
+        </div>
+
+        @foreach (var item in Model)
+        {
+            <div class="container-fluid border border-info ">
+                <div class="row ">
+                    <div class="col-sm-4 border-info border-right">
+                        <div class="col-3 p-1 ">
+                            @Html.DisplayNameFor(p => p.KPA)
+                        </div>
+                        <div class="col-12  border-info border border-bottom bg-light">
+                            @item.KPA.Name
+                        </div>
+                        <div class="col-3 p-1">
+                            @Html.DisplayNameFor(p => p.KPI)
+                        </div>
+                        <div class="col-12 border-info border border-bottom bg-light">
+                            @item.KPI.Name
+                        </div>
+                        <div class="col-12">
+                            <div class="row text-center border-info border border-bottom ">
+                                <div class="col-4 border-info border-right ">
+                                    @Html.DisplayNameFor(p => p.AnnualTarget)
+                                </div>
+                                <div class="col-4 border-info border-right">
+                                    @Html.DisplayNameFor(p => p.AnnualActual)
+                                </div>
+                                <div class="col-4">
+                                    @Html.DisplayNameFor(p => p.AnnualDeviation)
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="row text-center border-info border ">
+                                <div class="col-4 border-info border-right ">
+                                    @item.AnnualTarget
+                                </div>
+                                <div class="col-4 border-info border-right">
+                                    @item.AnnualActual
+                                </div>
+                                <div class="col-4 ">
+                                    @item.AnnualDeviation
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-8 border-info  ">
+                        <div class="row text-right p-1 border-info border-bottom ">
+                            <div class="col-3 border-info border-right ">
+                                @Html.DisplayNameFor(p => p.Qrt1Target)
+                                <div>@item.Qrt1Target </div>
+                            </div>
+                            <div class="col-3 border-info border-right">
+                                @Html.DisplayNameFor(p => p.Qrt2Target)
+                                <div>@item.Qrt2Target</div>
+                            </div>
+                            <div class="col-3 border-info border-right  ">
+                                @Html.DisplayNameFor(p => p.Qrt3Target)
+                                <div>@item.Qrt3Target</div>
+                            </div>
+                            <div class="col-3 ">
+                                @Html.DisplayNameFor(p => p.Qrt4Target)
+                                <div>@item.Qrt4Target</div>
+                            </div>
+                        </div>
+                        <div class="row text-right p-1 border-info border-bottom ">
+                            <div class="col-3 border-info border-right ">
+                                @Html.DisplayNameFor(p => p.Qrt1Actual)
+                                <div>@item.Qrt1Actual</div>
+                            </div>
+                            <div class="col-3 border-info border-right ">
+                                @Html.DisplayNameFor(p => p.Qrt2Actual)
+                                <div>@item.Qrt2Actual</div>
+                            </div>
+                            <div class="col-3 border-info border-right ">
+                                @Html.DisplayNameFor(p => p.Qrt3Actual)
+                                <div>@item.Qrt3Actual</div>
+                            </div>
+                            <div class="col-3">
+                                @Html.DisplayNameFor(p => p.Qrt4Actual)
+                                <div>@item.Qrt4Actual </div>
+                            </div>
+                        </div>
+                        <div class="row p-1 text-right border-info border-bottom">
+                            <div class="col-3 border-info border-right ">
+                                @Html.DisplayNameFor(p => p.Qrt1Deviation)
+                                <div>@item.Qrt1Deviation</div>
+                            </div>
+                            <div class="col-3 border-info border-right ">
+                                @Html.DisplayNameFor(p => p.Qrt2Deviation)
+                                <div>@item.Qrt2Deviation</div>
+                            </div>
+                            <div class="col-3 border-info border-right ">
+                                @Html.DisplayNameFor(p => p.Qrt3Deviation)
+                                <div>@item.Qrt3Deviation</div>
+                            </div>
+                            <div class="col-3">
+                                @Html.DisplayNameFor(p => p.Qrt4Deviation)
+                                <div>@item.Qrt4Deviation</div>
+                            </div>
+                        </div>
+                        <div class="row float-right p-1">
+                            <div class="p-1">
+                                <a asp-action="Details" class="btn btn-primary ml-auto" asp-route-id="@item.Id">Details</a>
+                            </div>
+                            <div class="p-1">
+                                <a asp-action="Edit" class="btn btn-success ml-auto " asp-route-id="@item.Id">Edit</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="p-1"></div>
+        }
+
+    </div>
+
+}

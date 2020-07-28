@@ -1,0 +1,76 @@
+﻿@model Corporate_Performance.Models.Performance
+@using Corporate_Performance.Extensions
+@{
+    ViewData["Title"] = "KPI Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<h2 class="text-info">Performance Details</h2>
+<br />
+
+<form>
+    <div asp-validation-summary="ModelOnly" class=" text-danger"></div>
+    <fieldset disabled>
+        <div class=" form-group row">
+            <div class=" col-2 ">
+                <label asp-for="Fiscal.FiscalYear" class="form-label"></label>
+            </div>
+            <div class=" col-2">
+                <input asp-for="Fiscal.FiscalYear" class="form-control-sm" />
+            </div>
+        </div>
+        <div class=" form-group row">
+            <div class=" col-2">
+                <label asp-for="KPA" class=" form-label"></label>
+            </div>
+            <div class=" col-5">
+                <input asp-for="KPA.Name" class="form-control bg-light" />
+            </div>
+        </div>
+        <div class=" form-group row">
+            <div class=" col-2">
+                <label asp-for="KPI" class=" form-label"></label>
+            </div>
+            <div class=" col-6">
+                <input asp-for="KPI.Name" class="form-control bg-light" />
+            </div>
+        </div>
+        <div class=" form-group row">
+            <div class=" col-2">
+                <label asp-for="KPI.Programme" class=" form-label"></label>
+            </div>
+            <div class=" col-6">
+                <input asp-for="KPI.Programme.Name" class="form-control bg-light" />
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-2 ">
+                <label asp-for="Comments" class=" form-label"></label>
+            </div>
+            <div id="textarea" class="pl-3">
+                @Html.TextAreaFor(p => p.Comments)
+            </div>
+        </div>
+        <div class=" form-group row">
+            <div class=" col-2">
+                <label asp-for="CorrectiveAction" class=" col-form-label"></label>
+            </div>
+            <div class="p-3">
+                @Html.TextAreaFor(p => p.CorrectiveAction)
+            </div>
+        </div>
+    </fieldset>
+    <div class="form-group row">
+        <div class="col-5 offset-2">
+            <partial name="_EndUserEdit" model="Model.Id" />
+            @Html.ActionLink("View POE Files", "List", "File", new { Model.Id }, htmlAttributes: new { @class = "btn btn-small btn-primary" })
+        </div>
+    </div>
+</form>
+@section Scripts{
+    <script>
+        $('#textarea').val(function (i, val) {
+            return $('<div>').html(val).text();
+        });
+    </script>
+}
