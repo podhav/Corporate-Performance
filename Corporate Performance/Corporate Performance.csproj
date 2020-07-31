@@ -46,8 +46,11 @@
 
   <ItemGroup>
     <Folder Include="Areas\Identity\Pages\Shared\" />
+    <Folder Include="Areas\Admin\Views\" />
+    <Folder Include="Areas\CPMS\Views\" />
     <Folder Include="Content\Files\" />
     <Folder Include="Controllers\" />
+    <Folder Include="Views\" />    
     <Folder Include="wwwroot\images\" />
   </ItemGroup>
 

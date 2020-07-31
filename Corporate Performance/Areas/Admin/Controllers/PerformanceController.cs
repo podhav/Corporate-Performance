@@ -28,7 +28,6 @@ namespace Corporate_Performance.Areas.Admin.Controllers
         [BindProperty]
         public PerformanceViewModel PerformanceVM { get; set; }
 
-
         public PerformanceController(ApplicationDbContext db, IWebHostEnvironment hostingEnvironment)
         {
             _db = db;
@@ -41,11 +40,48 @@ namespace Corporate_Performance.Areas.Admin.Controllers
                 Performance = new Models.Performance()
             };
         }
-
-        public async Task<IActionResult> Index()
+                public async Task<IActionResult> Index(string sortOrder, int? pageNumber, string currentFilter, string searchString)
         {
-            var performance = await _db.Performance.Include(p => p.Fiscal).Include(p => p.KPA).Include(p => p.KPI).ToListAsync();
-            return View(performance);
+                ViewData["CurrentSort"] = sortOrder;
+                ViewData["NameSortParam"] = string.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+                ViewData["PerfSortParam"] = string.IsNullOrEmpty(sortOrder) ? "perf_desc" : "";
+                ViewData["CurrentFilter"] = searchString;
+
+                if (searchString != null)
+                {
+                    pageNumber = 1;
+                }
+                else
+                {
+                    searchString = currentFilter;
+                }
+
+                ViewData["CurrentFilter"] = searchString;
+
+            var Performance = from s in _db.Performance.Include(s=>s.KPA).Include(s=>s.KPI).Include(s=>s.Fiscal)
+                      select s;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                Performance = Performance.Where(p =>p.KPI.Name.Contains(searchString)
+                    ||p.KPA.Name.Contains(searchString));
+            }
+
+            switch (sortOrder)
+            {
+                case "perf_desc":
+                    Performance = Performance.OrderByDescending(s => s.KPA.Name);
+                    break;
+                case "name_desc":
+                    Performance = Performance.OrderByDescending(s => s.KPI.Name);
+                    break;
+                default:
+                    Performance = Performance.OrderBy(s => s.KPA.Name);
+                    break;
+            }
+            int pageSize = 5;
+
+            return View(await PaginatedList<Performance>.CreateAsync(Performance.AsNoTracking(), pageNumber ?? 1, pageSize)); ;
         }
 
         public IActionResult Images(int id)
@@ -72,7 +108,6 @@ namespace Corporate_Performance.Areas.Admin.Controllers
                 return View(PerformanceVM);
             }
            
-
             _db.Performance.Add(PerformanceVM.Performance);
             
             await _db.SaveChangesAsync();
@@ -162,7 +197,7 @@ namespace Corporate_Performance.Areas.Admin.Controllers
             performanceItemfromDb.AnnualTarget = PerformanceVM.Performance.Qrt1Target +
                                                  PerformanceVM.Performance.Qrt2Target +
                                                  PerformanceVM.Performance.Qrt3Target +
-                                                 PerformanceVM.Performance.Qrt4Target;
+                                                 PerformanceVM.Performance.Qrt4Target;         
             await _db.SaveChangesAsync();
 
             return RedirectToAction(nameof(Index));

@@ -119,7 +119,7 @@ namespace Corporate_Performance
 
                 options.AccessDeniedPath = $"/Identity/Account/AccessDenied";
             });
-            services.AddControllersWithViews();
+            services.AddControllersWithViews().AddRazorRuntimeCompilation();
             services.AddRazorPages().AddRazorRuntimeCompilation();
             services.AddSession(options =>
             {

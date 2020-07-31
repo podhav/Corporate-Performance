@@ -121,13 +121,18 @@ namespace Corporate_Performance.Controllers
             performanceItemfromDb.KPAId = IndexVM.Performance.KPAId;
             performanceItemfromDb.KPIId = IndexVM.Performance.KPIId;
             performanceItemfromDb.Qrt1Actual = IndexVM.Performance.Qrt1Actual;
+            performanceItemfromDb.Qrt1Deviation = IndexVM.Performance.Qrt1Actual - IndexVM.Performance.Qrt1Target;
             performanceItemfromDb.Qrt2Actual = IndexVM.Performance.Qrt2Actual;
+            performanceItemfromDb.Qrt2Deviation = IndexVM.Performance.Qrt2Actual - IndexVM.Performance.Qrt2Target;
             performanceItemfromDb.Qrt3Actual = IndexVM.Performance.Qrt3Actual;
-            performanceItemfromDb.Qrt4Actual = IndexVM.Performance.Qrt4Actual;            
+            performanceItemfromDb.Qrt3Deviation = IndexVM.Performance.Qrt3Actual - IndexVM.Performance.Qrt3Target;
+            performanceItemfromDb.Qrt4Actual = IndexVM.Performance.Qrt4Actual;
+            performanceItemfromDb.Qrt4Deviation = IndexVM.Performance.Qrt4Actual - IndexVM.Performance.Qrt4Target;
             performanceItemfromDb.AnnualActual = IndexVM.Performance.Qrt1Actual+
                                                  IndexVM.Performance.Qrt2Actual+
                                                  IndexVM.Performance.Qrt3Actual+
                                                  IndexVM.Performance.Qrt4Actual;
+            performanceItemfromDb.AnnualDeviation = IndexVM.Performance.AnnualActual - IndexVM.Performance.AnnualTarget;
             performanceItemfromDb.CorrectiveAction = IndexVM.Performance.CorrectiveAction;
             performanceItemfromDb.Comments = IndexVM.Performance.Comments;
 

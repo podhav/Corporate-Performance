@@ -13,21 +13,32 @@
         <partial name="_CreateButtonPartial" />
     </div>
 </div>
+<form asp-action="Index" method="get">
+    <div class="form-actions no-color">
+        <p>
+            Find by name: <input type="text" name="SearchString" value="@ViewData["currentFilter"]" />
+            <input type="submit" value="Search" class="btn btn-info" /> |
+            <a asp-action="Index">Back to Full List</a>
+        </p>
+    </div>
+</form>
 <br />
 <div>
     @if (Model.Count() > 0)
     {
         <table class="table table-striped border table-sm">
-           <tr class="table-secondary">
+            <tr class="table-secondary">
                 <th>
                     @Html.DisplayNameFor(p => p.FiscalId)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(p => p.KPA)
+                    <a asp-action="Index"
+                       asp-route-sortOrder=@ViewData["PerfSortParam"]> KPA</a>
                 </th>
                 <th>
-                    @Html.DisplayNameFor(p => p.KPI)
-                </th>               
+                    <a asp-action="Index"
+                       asp-route-sortOrder=@ViewData["NameSortParam"]> KPI</a>
+                </th>
                 <th>
                     @Html.DisplayNameFor(p => p.Qrt1Target)
                 </th>
@@ -42,7 +53,7 @@
                 </th>
                 <th>
                     @Html.DisplayNameFor(p => p.AnnualTarget)
-                </th>        
+                </th>
                 <th></th>
                 <th></th>
             </tr>
@@ -57,7 +68,7 @@
                     </td>
                     <td>
                         @Html.DisplayFor(P => item.KPI.Name)
-                    </td>                    
+                    </td>
                     <td>
                         @Html.DisplayFor(P => item.Qrt1Target)
                     </td>
@@ -72,13 +83,14 @@
                     </td>
                     <td>
                         @Html.DisplayFor(P => item.AnnualTarget)
-                    </td>                   
+                    </td>
                     <td>
                         <partial name="_TableButtonPartial" model="item.Id" />
                     </td>
                 </tr>
             }
         </table>
+        <partial name="_PaginatedPartial" view-data="ViewData" model="Model" />
     }
     else
     {

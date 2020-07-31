@@ -46,19 +46,18 @@ namespace Corporate_Performance.Area.Admin.Controllers
 
             ViewData["CurrentFilter"] = searchString;
 
-            var KPI = from s in _db.KPI.Include(s=>s.Programme)
+            var KPI = from s in _db.KPI.Include(s => s.Programme)
                       select s;
 
             if (!String.IsNullOrEmpty(searchString))
             {
-               KPI = KPI.Where(s => s.Name.Contains(searchString)
-                                       || s.Programme.Name.Contains(searchString));
+                KPI = KPI.Where(s => s.Name.Contains(searchString)
+                                        || s.Programme.Name.Contains(searchString));
             }
-
             switch (sortOrder)
             {
                 case "name_desc":
-                    KPI = KPI.OrderByDescending(s => s.Name);                   
+                    KPI = KPI.OrderByDescending(s => s.Name);
                     break;
                 case "prog_desc":
                     KPI = KPI.OrderByDescending(s => s.Programme.Name);
@@ -70,7 +69,7 @@ namespace Corporate_Performance.Area.Admin.Controllers
             int pageSize = 4;
             return View(await PaginatedList<KPI>.CreateAsync(KPI.AsNoTracking(), pageNumber ?? 1, pageSize));
 
-        }           
+        }
 
         //GET FOR CREATE
         public async Task<IActionResult> Create()

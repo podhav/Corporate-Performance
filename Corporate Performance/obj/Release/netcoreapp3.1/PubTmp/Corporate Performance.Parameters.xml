@@ -3,4 +3,7 @@
   <parameter name="IIS Web Application Name" description="" value="ecdc" tags="IisApp">
     <parameterEntry kind="ProviderPath" scope="IisApp" match="^G:\\Users\\podhav\\source\\repos\\Corporate\ Performance\\Corporate\ Performance\\obj\\Release\\netcoreapp3\.1\\PubTmp\\Out\\$" />
   </parameter>
+  <parameter name="Corporate_Performance.Data.ApplicationDbContext" description="" value="Data Source=tcp:ecdc-cpms.database.windows.net,1433;Initial Catalog=CPMS;User Id=ecdcadmin@ecdc-cpms;Password=admin123*" tags="dbfullsql">
+    <parameterEntry kind="ProviderPath" scope="dbfullsql" match="^G:\\Users\\podhav\\source\\repos\\Corporate\ Performance\\Corporate\ Performance\\obj\\Release\\netcoreapp3\.1\\PubTmp\\EFSQLScripts\\Corporate_Performance\.Data\.ApplicationDbContext\.sql$" />
+  </parameter>
 </parameters>

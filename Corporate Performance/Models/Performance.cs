@@ -57,21 +57,17 @@ namespace Corporate_Performance.Models
         [Display(Name = "Qrt4 Actual")]
         public int Qrt4Actual { get; set; }
 
-        [Display(Name = "Qrt1 Deviation ")]
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-        public int Qrt1Deviation { get; private set; }
+        [Display(Name = "Qrt1 Deviation ")]        
+        public int Qrt1Deviation { get; set; }
 
-        [Display(Name = "Qrt2 Deviation ")]
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-        public int Qrt2Deviation { get; private set; }
+        [Display(Name = "Qrt2 Deviation ")]        
+        public int Qrt2Deviation { get; set; }
 
-        [Display(Name = "Qrt3 Deviation ")]
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-        public int Qrt3Deviation { get; private set; }
+        [Display(Name = "Qrt3 Deviation ")]       
+        public int Qrt3Deviation { get; set; }
 
-        [Display(Name = "Qrt4 Deviation ")]
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-        public int Qrt4Deviation { get; private set; }
+        [Display(Name = "Qrt4 Deviation ")]       
+        public int Qrt4Deviation { get; set; }
 
         [Display(Name = "Annual Target")]
         public int AnnualTarget { get; set; }
@@ -80,8 +76,7 @@ namespace Corporate_Performance.Models
         public int AnnualActual { get; set; }
 
         [Display(Name = "Annual Deviation")]
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-        public int AnnualDeviation { get; private set; }
+        public int AnnualDeviation { get; set; }
 
         [Display(Name = "Corrective Action")]
         public string CorrectiveAction { get; set; }

@@ -524,4 +524,6 @@ G:\Users\podhav\source\repos\Corporate Performance\Corporate Performance\obj\BNB
 G:\Users\podhav\source\repos\Corporate Performance\Corporate Performance\obj\BNB\Debug\netcoreapp3.1\Corporate Performance.dll
 G:\Users\podhav\source\repos\Corporate Performance\Corporate Performance\obj\BNB\Debug\netcoreapp3.1\Corporate Performance.pdb
 G:\Users\podhav\source\repos\Corporate Performance\Corporate Performance\obj\BNB\Debug\netcoreapp3.1\Corporate Performance.genruntimeconfig.cache
+G:\Users\podhav\source\repos\Corporate Performance\Corporate Performance\bin\BNB\Debug\netcoreapp3.1\Properties\serviceDependencies.ecdc - Web Deploy.json
+G:\Users\podhav\source\repos\Corporate Performance\Corporate Performance\bin\BNB\Debug\netcoreapp3.1\Properties\serviceDependencies.json
 G:\Users\podhav\source\repos\Corporate Performance\Corporate Performance\obj\BNB\Debug\netcoreapp3.1\NuGet\8A0D6AA6427953945CB765A7340A32FDBD9B8732\MimeTypes\2.0.2\MimeTypes.cs

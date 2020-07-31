@@ -62,6 +62,12 @@ namespace Corporate_Performance.Area.Admin.Controllers
             return View(await PaginatedList<Programme>.CreateAsync(Programme.AsNoTracking(), pageNumber ?? 1, pageSize));
         }
 
+        //GET FOR CREATE
+        public IActionResult Create()
+        {
+            return View();
+        }
+
         //POST CREATE
         [HttpPost]
         [ValidateAntiForgeryToken]

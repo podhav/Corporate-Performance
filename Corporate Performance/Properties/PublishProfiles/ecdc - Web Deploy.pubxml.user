@@ -8,4 +8,14 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <TimeStampOfAssociatedLegacyPublishXmlFile />
     <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAA2ODOdXVbECg9QCdAjmfSwAAAAACAAAAAAADZgAAwAAAABAAAACmh1MTl5iCoZmAKi7p8d28AAAAAASAAACgAAAAEAAAALRm+0/B5H4ofbcTX69bfHyAAAAAN1u6OaB8zQZ73+BS7XcW4MC8jvGNdH7CQ5vtSG6jOUZH2Mc27HtYcE0UwTTKJtxXcIbAVlNV3SsMDD15KgZ3xq5G5JystOwa7Vy7jo8x0+OkEztOCF9iLtNiDk/oOPNgGg2zS9Ov18iPhNv7nwx+X62zOv8hEslHyUj0clW7eNgUAAAA1cC+SJnHxJqpWCjpIRAYmuRrnz8=</EncryptedPassword>
   </PropertyGroup>
+  <ItemGroup>
+    <DestinationConnectionStrings Include="DefaultConnection">
+      <Value>Data Source=tcp:ecdc-cpms.database.windows.net,1433%3bInitial Catalog=CPMS%3bUser Id=ecdcadmin%40ecdc-cpms%3bPassword=admin123%2a</Value>
+    </DestinationConnectionStrings>
+  </ItemGroup>
+  <ItemGroup>
+    <EFMigrations Include="Corporate_Performance.Data.ApplicationDbContext">
+      <Value>Data Source=tcp:ecdc-cpms.database.windows.net,1433%3bInitial Catalog=CPMS%3bUser Id=ecdcadmin%40ecdc-cpms%3bPassword=admin123%2a</Value>
+    </EFMigrations>
+  </ItemGroup>
 </Project>

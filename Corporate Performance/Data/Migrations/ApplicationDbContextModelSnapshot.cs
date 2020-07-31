@@ -119,7 +119,6 @@ namespace Corporate_Performance.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("AnnualDeviation")
-                        .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("int");
 
                     b.Property<int>("AnnualTarget")
@@ -144,7 +143,6 @@ namespace Corporate_Performance.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("Qrt1Deviation")
-                        .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("int");
 
                     b.Property<int>("Qrt1Target")
@@ -154,7 +152,6 @@ namespace Corporate_Performance.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("Qrt2Deviation")
-                        .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("int");
 
                     b.Property<int>("Qrt2Target")
@@ -164,7 +161,6 @@ namespace Corporate_Performance.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("Qrt3Deviation")
-                        .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("int");
 
                     b.Property<int>("Qrt3Target")
@@ -174,7 +170,6 @@ namespace Corporate_Performance.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("Qrt4Deviation")
-                        .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("int");
 
                     b.Property<int>("Qrt4Target")
