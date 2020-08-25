@@ -44,10 +44,10 @@ namespace Corporate_Performance.Controllers
         public async Task<IActionResult> Index()
         {
             IndexVM.performance = await _db.Performance.Include(p => p.Fiscal).Include(p => p.KPA).Include(p => p.KPI).ToListAsync();
-                
+
             return View(IndexVM);
         }
-               
+
         //GET : Edit
         [Authorize]
         public async Task<IActionResult> Edit(int? id)
@@ -116,31 +116,28 @@ namespace Corporate_Performance.Controllers
                     await _db.Files.AddAsync(objfiles);
                 }
             }
-            { 
-            performanceItemfromDb.FiscalId = IndexVM.Performance.FiscalId;
-            performanceItemfromDb.KPAId = IndexVM.Performance.KPAId;
-            performanceItemfromDb.KPIId = IndexVM.Performance.KPIId;
-            performanceItemfromDb.Qrt1Actual = IndexVM.Performance.Qrt1Actual;
-            performanceItemfromDb.Qrt1Deviation = IndexVM.Performance.Qrt1Actual - IndexVM.Performance.Qrt1Target;
-            performanceItemfromDb.Qrt2Actual = IndexVM.Performance.Qrt2Actual;
-            performanceItemfromDb.Qrt2Deviation = IndexVM.Performance.Qrt2Actual - IndexVM.Performance.Qrt2Target;
-            performanceItemfromDb.Qrt3Actual = IndexVM.Performance.Qrt3Actual;
-            performanceItemfromDb.Qrt3Deviation = IndexVM.Performance.Qrt3Actual - IndexVM.Performance.Qrt3Target;
-            performanceItemfromDb.Qrt4Actual = IndexVM.Performance.Qrt4Actual;
-            performanceItemfromDb.Qrt4Deviation = IndexVM.Performance.Qrt4Actual - IndexVM.Performance.Qrt4Target;
-            performanceItemfromDb.AnnualActual = IndexVM.Performance.Qrt1Actual+
-                                                 IndexVM.Performance.Qrt2Actual+
-                                                 IndexVM.Performance.Qrt3Actual+
-                                                 IndexVM.Performance.Qrt4Actual;
-            performanceItemfromDb.AnnualDeviation = IndexVM.Performance.AnnualActual - IndexVM.Performance.AnnualTarget;
-            performanceItemfromDb.CorrectiveAction = IndexVM.Performance.CorrectiveAction;
-            performanceItemfromDb.Comments = IndexVM.Performance.Comments;
+            {
+                performanceItemfromDb.FiscalId = IndexVM.Performance.FiscalId;
+                performanceItemfromDb.KPAId = IndexVM.Performance.KPAId;
+                performanceItemfromDb.KPIId = IndexVM.Performance.KPIId;
+                performanceItemfromDb.Qrt1Actual = IndexVM.Performance.Qrt1Actual;
+                performanceItemfromDb.Qrt1Deviation = IndexVM.Performance.Qrt1Actual - IndexVM.Performance.Qrt1Target;
+                performanceItemfromDb.Qrt2Actual = IndexVM.Performance.Qrt2Actual;
+                performanceItemfromDb.Qrt2Deviation = IndexVM.Performance.Qrt2Actual - IndexVM.Performance.Qrt2Target;
+                performanceItemfromDb.Qrt3Actual = IndexVM.Performance.Qrt3Actual;
+                performanceItemfromDb.Qrt3Deviation = IndexVM.Performance.Qrt3Actual - IndexVM.Performance.Qrt3Target;
+                performanceItemfromDb.Qrt4Actual = IndexVM.Performance.Qrt4Actual;
+                performanceItemfromDb.Qrt4Deviation = IndexVM.Performance.Qrt4Actual - IndexVM.Performance.Qrt4Target;
+                performanceItemfromDb.AnnualActual = IndexVM.Performance.AnnualActual;
+                performanceItemfromDb.AnnualDeviation = IndexVM.Performance.AnnualActual - IndexVM.Performance.AnnualTarget;
+                performanceItemfromDb.CorrectiveAction = IndexVM.Performance.CorrectiveAction;
+                performanceItemfromDb.Comments = IndexVM.Performance.Comments;
 
-            await _db.SaveChangesAsync();
-        }  
-            return RedirectToAction(nameof(Index));          
-    }
-      
+                await _db.SaveChangesAsync();
+            }
+            return RedirectToAction(nameof(Index));
+        }
+
         // DOWNLOAD FILE FROM DB
 
         public async Task<IActionResult> Download(string filename)
@@ -185,33 +182,33 @@ namespace Corporate_Performance.Controllers
         }
         //GET : Details 
         [Authorize]
-    public async Task<IActionResult> Details(int? id)
-    {
-        if (id == null)
+        public async Task<IActionResult> Details(int? id)
         {
-            return NotFound();
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var performance = await _db.Performance.Include(p => p.Fiscal).Include(p => p.KPA).Include(p => p.KPI).Include(p => p.KPI.Programme).SingleOrDefaultAsync(p => p.Id == id);
+
+            if (performance == null)
+            {
+                return NotFound();
+            }
+
+            return View(performance);
         }
 
-        var performance = await _db.Performance.Include(p => p.Fiscal).Include(p => p.KPA).Include(p => p.KPI).Include(p => p.KPI.Programme).SingleOrDefaultAsync(p => p.Id == id);
-
-        if (performance == null)
+        public IActionResult Privacy()
         {
-            return NotFound();
+            return View();
         }
 
-        return View(performance);
-    }
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
 
-    public IActionResult Privacy()
-    {
-        return View();
     }
-
-    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-    public IActionResult Error()
-    {
-        return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-    }
-
-}
 }

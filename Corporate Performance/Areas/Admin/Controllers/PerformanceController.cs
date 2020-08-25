@@ -194,10 +194,7 @@ namespace Corporate_Performance.Areas.Admin.Controllers
             performanceItemfromDb.Qrt2Target = PerformanceVM.Performance.Qrt2Target;
             performanceItemfromDb.Qrt3Target = PerformanceVM.Performance.Qrt3Target;
             performanceItemfromDb.Qrt4Target = PerformanceVM.Performance.Qrt4Target;
-            performanceItemfromDb.AnnualTarget = PerformanceVM.Performance.Qrt1Target +
-                                                 PerformanceVM.Performance.Qrt2Target +
-                                                 PerformanceVM.Performance.Qrt3Target +
-                                                 PerformanceVM.Performance.Qrt4Target;         
+            performanceItemfromDb.AnnualTarget = PerformanceVM.Performance.AnnualTarget;       
             await _db.SaveChangesAsync();
 
             return RedirectToAction(nameof(Index));

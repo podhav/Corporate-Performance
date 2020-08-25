@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Corporate_Performance.Areas.Admin.Controllers
 {
-    [Authorize(Roles = SD.ManagerUser)]
+    [Authorize(Roles = SD.ManagerUser + ","  + SD.AdminUser)]
     [Area("Admin")]
 
     public class UserController : Controller
